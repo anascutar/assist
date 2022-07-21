@@ -8,14 +8,12 @@ describe('Profile Page Test',() => {
       cy.visit('https://victorious-wave-093b83610.1.azurestaticapps.net/#/profile')
     })
 
-
-    it('Admin profile page succes',()=>{
+    //am refacut testarea pt profile page(ieri am facut pt overwrite, iar astazi am schimbat cu asster)
+    it('Check Admin profile page ',()=>{
       cy.get('#email-address').type('anascutar@yahoo.com')
-        .wait(1000)
-        cy.get('#password').type('TPSKSQ3E')
-        .wait(1000)
-        cy.get('.sc-iqAclL').click()
-        .wait(1000)
+      cy.get('#password').type('TPSKSQ3E')
+      cy.get('.sc-iqAclL').click()
+        
         cy.url().should('include', 'dashboard') 
         cy.url().should('eq','https://victorious-wave-093b83610.1.azurestaticapps.net/#/dashboard')
         
@@ -23,28 +21,29 @@ describe('Profile Page Test',() => {
         cy.url().should('eq', 'https://victorious-wave-093b83610.1.azurestaticapps.net/#/profile')
 
 
-        cy.get('[name="firstName"]').clear()
-        cy.get('[name="firstName"]').type('Annnnna')
-        .wait(1000)
+        cy.get('[name="firstName"]').should('have.value','Annnnna')
+        cy.get('[name="lastName"]').should('have.value','Scutar')
+        cy.get('[name="address"]').should('have.value','adress street')
+        cy.get('[name="email"]').should('have.value','anascutar@yahoo.com')
+        cy.get('[name="personalNumber"]').should('have.value','2990718015098')
 
-        cy.get('[name="lastName"]').clear()
-        cy.get('[name="lastName"]').type('Scutar')
-        .wait(1000)
-
-        cy.get('[name="address"]').clear()
-        cy.get('[name="address"]').type('adress street')
-        .wait(1000)
-
-        cy.get('[name="email"]').clear()
-        cy.get('[name="email"]').type('anascutar@yahoo.com')
-        .wait(1000)
-        cy.get('#password').type('TPSKSQ3E')
-
-        cy.get('[name="personalNumber"]').clear()
-        cy.get('[name="personalNumber"]').type('2990718015098')
-
-        cy.get('.sc-iqAclL').click()
+      /*  cy.get('.sc-iqAclL').click()
         cy.focused().click()
-        cy.contains('dashboard').click()
+        cy.contains('dashboard').click()*///for save button
+    })
+    //Pentru update-ul la parola am facut ub it separat
+    it('Check Update Admin profile',()=>{
+      cy.get('#email-address').type('anascutar@yahoo.com')
+      cy.get('#password').type('TPSKSQ3E')
+      cy.get('.sc-iqAclL').click()
+        
+        cy.url().should('include', 'dashboard') 
+        cy.url().should('eq','https://victorious-wave-093b83610.1.azurestaticapps.net/#/dashboard')
+        
+        cy.get('.sc-iCoGMd').click()
+        cy.url().should('eq', 'https://victorious-wave-093b83610.1.azurestaticapps.net/#/profile')
+
+      cy.get('#password').clear();
+      cy.get('#password').type('TPSKSQ3E')
     })
 })

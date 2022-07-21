@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-
+//am adaugat functia random pt generarea adresei de email
 const uuid = () => Cypress._.random(0, 1e6)
 
 const id = uuid()
